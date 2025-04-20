@@ -1,8 +1,8 @@
 # Obsidian D&D 2024 Encounter Builder
 
-![GitHub Workflow Status (event)](https://img.shields.io/github/actions/workflow/status/YOUR_USERNAME/YOUR_REPONAME/release.yml) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/YOUR_USERNAME/YOUR_REPONAME?sort=semver) ![GitHub All Releases](https://img.shields.io/github/downloads/YOUR_USERNAME/YOUR_REPONAME/total)
 
-**Build balanced D&D encounters directly within Obsidian, tailored for the 2024 ruleset!**
+
+**Build b D&D encounters directly within Obsidian, tailored for the 2024 ruleset!**
 
 This plugin helps Dungeon Masters streamline the encounter creation process by providing:
 
@@ -33,25 +33,6 @@ This plugin helps Dungeon Masters streamline the encounter creation process by p
 ---
 
 ## Installation
-
-### From Community Plugins (Recommended)
-
-1.  Open Obsidian's **Settings**.
-2.  Go to **Community Plugins**.
-3.  Ensure **Restricted Mode** is **off**.
-4.  Click **Browse** community plugins.
-5.  Search for "D&D 2024 Encounter Builder".
-6.  Click **Install**.
-7.  Once installed, **Enable** the plugin.
-
-*(Note: This assumes the plugin is available in the community plugins list. If not yet submitted/approved, use BRAT or Manual installation.)*
-
-### Using BRAT (For Beta Testers)
-
-1.  Install the [BRAT](https://github.com/TfTHacker/obsidian42-brat) plugin via Community Plugins.
-2.  Open the command palette (`Ctrl/Cmd+P`) and run the command `BRAT: Add a beta plugin for testing`.
-3.  Enter the repository path: `YOUR_USERNAME/YOUR_REPONAME`.
-4.  Enable the "D&D 2024 Encounter Builder" plugin in **Settings** > **Community Plugins**.
 
 ### Manual Installation
 
@@ -98,14 +79,14 @@ This plugin helps Dungeon Masters streamline the encounter creation process by p
 *   Once your creature list is complete, click the **"Create Encounter Table"** button.
 *   The modal will close, and a markdown code block like the following will be inserted at your cursor position:
 
-```markdown
+
 ```encounter
 | Qty | Creature        | CR   | XP    | Total XP |
 |:----|:----------------|:-----|------:|---------:|
 | 2   | [[Goblin]]      | 1/4  | 75    | 150      |
 | 1   | [[Bugbear]]     | 1    | 200   | 200      |
 | **Total** |             |      |       | **350**  |
-
+```
 
 ### 5. Use the Difficulty Calculator (Reading View)
 
@@ -174,6 +155,7 @@ This plugin is released under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
+*   98% Vibe Coding with Claude AI and Google AI Studio
 *   Inspired by the need for streamlined encounter building in Obsidian.
 *   Utilizes encounter balancing concepts from the Dungeons & Dragons 2024 Dungeon Master's Guide.
 *   Incorporates benchmark ideas popularized by Sly Flourish's Return of the Lazy Dungeon Master.
