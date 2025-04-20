@@ -288,3 +288,74 @@
   width: 600px;
   max-width: 80vw;
 }
+
+/* --- START OF REPLACEMENT --- */
+
+/* Make toggle button extremely visible */
+.encounter-toggle-button {
+    background-color: #ff5555 !important; /* Bright red */
+    color: white !important;
+    border: 3px solid black !important;
+    padding: 10px !important;
+    margin: 20px 0 !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    width: 100% !important;
+    display: block !important;
+    text-align: center !important;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.encounter-toggle-button:hover {
+    background-color: #4c6b8e !important;
+    filter: brightness(1.1);
+}
+
+
+/* Make sure content container has no conflicts */
+.encounter-content-container {
+    width: 100%;
+    margin-top: 5px;
+}
+
+
+.encounter-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Style the Toggle Button using Theme Variables */
+.encounter-toggle-details-button {
+    background-color: var(--interactive-normal);
+    color: var(--text-normal);
+    border: 1px solid var(--interactive-normal);
+    padding: 6px 12px;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.encounter-toggle-details-button:hover {
+    background-color: var(--interactive-hover);
+}
+
+.encounter-toggle-details-button:active {
+    transform: scale(0.98);
+}
+
+/* Add transition for smooth show/hide effect */
+.encounter-content-container {
+    transition: opacity 0.2s ease;
+}
+
+.encounter-content-container[data-visible="false"] {
+    display: none !important; /* Use !important to override any other display settings */
+}
