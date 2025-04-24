@@ -1,104 +1,27 @@
-# Obsidian D&D 2024 Encounter Builder
 
-
-
-**Build b D&D encounters directly within Obsidian, tailored for the 2024 ruleset!**
-
-This plugin helps Dungeon Masters streamline the encounter creation process by providing:
-
-*   A user-friendly modal for adding monsters.
-*   Automatic monster CR/XP lookup from your Obsidian vault.
-*   Calculation of total encounter XP.
-*   Generation of a clean markdown table for your encounter.
-*   An integrated difficulty calculator in reading view based on DMG 2024 XP budgets and Lazy DM CR benchmarks.
-
----
-
-## Features
-
-*   **Encounter Creation Modal:** Easily add creatures with quantity, name, CR, and XP.
-*   **Vault-Powered Monster Lookup:** Autocomplete suggests monsters as you type, searching configurable locations in your vault.
-*   **Automatic Stat Parsing:** Looks up CR and XP by parsing creature stat block files (supports multiple common formats, including 2024 style and YAML frontmatter).
-    *   Prompts for selection if multiple matching files are found.
-    *   Prompts for manual entry if parsing fails.
-*   **Quick Add:** Buttons for adding common low-level monsters (e.g., Goblin, Zombie, Orc) with 2024 stats.
-*   **Dynamic List:** View, edit, or remove creatures from your encounter list within the modal before finalizing.
-*   **Markdown Table Generation:** Creates a ` ```encounter ``` ` code block containing a formatted markdown table with creature details, totals, and automatic `[[wikilinks]]` for creature names.
-*   **Rendered Difficulty Calculator:** When viewing the note, the `encounter` block renders as a table with an interactive section below:
-    *   Input Party Size and Average Level.
-    *   Calculates difficulty based on **DMG 2024 XP Thresholds** (Low, Moderate, High, Out of Bounds), optionally applying official encounter multipliers.
-    *   Calculates difficulty based on **Lazy DM CR Benchmarks** (comparing total CR and highest CR to party level).
-*   **Configurable Settings:** Define preferred monster locations in your vault and toggle encounter multipliers.
-
----
-
-## Installation
-
-### Manual Installation
-
-1.  Download the latest `main.js`, `manifest.json`, and `styles.css` files from the [Releases page](https://github.com/Sparks01/obsidian_encounter_builder/releases/latest) of this repository.
-2.  Navigate to your Obsidian vault's plugins folder: `VaultFolder/.obsidian/plugins/`.
-3.  Create a new folder named `dnd-2024-encounter-builder` (or similar).
-4.  Place the downloaded `main.js`, `manifest.json`, and `styles.css` files into this new folder.
-5.  Restart Obsidian or reload plugins.
-6.  Enable the "D&D 2024 Encounter Builder" plugin in **Settings** > **Community Plugins**.
-
----
-
-## Usage
-
-### 1. Create an Encounter
-
-1.  Open the command palette (`Ctrl/Cmd+P`).
-2.  Search for and select the command: **"Encounter Builder: Create Encounter Table"**.
-3.  The "Create Encounter" modal will appear.
-
-### 2. Add Creatures
-
-*   **Quantity:** Enter the number of this creature type.
-*   **Creature Name:** Start typing the creature's name.
-    *   An autocomplete dropdown will appear, suggesting matching monster files from your configured vault locations. Prioritizes 2024 sources if found.
-    *   Select a suggestion with mouse/arrow keys + Enter, or type the full name.
-*   **Lookup CR/XP:** Click this button (or press Enter in the Creature Name field) to attempt parsing CR/XP from the corresponding monster file.
-    *   If successful, the CR and XP fields will populate.
-    *   If multiple files match, a selection modal will appear.
-    *   If parsing fails, a manual entry modal will appear.
-*   **CR / XP:** These fields can be manually entered or edited if lookup doesn't work or needs correction.
-*   **Add Creature to List:** Click this button (or press Enter in the XP field) to add the creature with its details to the list below.
-*   **Quick Add Buttons:** Click buttons for common monsters to quickly populate the Name, CR, and XP fields. Adjust Quantity and click "Add Creature to List".
-
-### 3. Manage the List
-
-*   Added creatures appear in a table within the modal.
-*   **Edit:** Click the "Edit" button next to a creature to load its details back into the form for modification. Click "Update Creature" to save changes.
-*   **Remove:** Click the "Remove" button to delete a creature from the list.
-*   The table footer shows the **Grand Total XP** (unadjusted) for the current list.
-
-### 4. Generate the Table
-
-*   Once your creature list is complete, click the **"Create Encounter Table"** button.
-*   The modal will close, and a markdown code block like the following will be inserted at your cursor position:
-
-
-```encounter
-| Qty | Creature        | CR   | XP    | Total XP |
-|:----|:----------------|:-----|------:|---------:|
-| 2   | [[Goblin]]      | 1/4  | 75    | 150      |
-| 1   | [[Bugbear]]     | 1    | 200   | 200      |
-| **Total** |             |      |       | **350**  |
-```
-
-### 5. Use the Difficulty Calculator (Reading View)
+### 5. Use Rendered Features (Reading View)
 
 1.  Switch to Obsidian's Reading View.
 2.  The `encounter` block will render as a formatted table.
-3.  Below the table, you'll find the **Difficulty Calculator**:
-    *   Enter the **Party Size** (number of characters).
-    *   Enter the **Average Level** of the party characters.
-    *   Click **"Calculate Difficulty"**.
-4.  The results section will appear, showing:
-    *   **DMG 2024 Difficulty:** Based on XP thresholds for the party's level. It shows the encounter's Adjusted XP (if multipliers are enabled) compared to Low, Moderate, High, and Out of Bounds thresholds.
-    *   **Lazy DM Benchmark:** Based on CR comparisons. It shows the sum of monster CRs and the highest single monster CR compared to party level-based benchmarks, providing a rating (Easy, Medium, Hard, Potentially Deadly).
+3.  Below the table (or near the calculator inputs), you'll find several controls:
+    *   **Difficulty Calculator:**
+        *   Enter the **Party Size** and **Average Level**.
+        *   Click **"Calculate Difficulty"**.
+        *   Results appear, showing **DMG 2024 XP Difficulty** and **Lazy DM CR Benchmark** ratings.
+    *   **Edit Encounter Button:**
+        *   Click this button to modify the encounter defined in *this specific code block*.
+        *   The Encounter Modal opens, pre-filled with the creatures from the table.
+        *   Add, remove, or edit creatures as needed.
+        *   Click **"Save Changes"**. The plugin will attempt to update the original code block directly in your note.
+        (Note: If the note context has changed significantly, it might insert the updated block at the cursor instead).
+    *   **Export Statblocks Button:**
+        *   Click this button to generate a summary note for the creatures in *this specific code block*.
+        *   The plugin finds the unique creatures listed.
+        *   It searches your vault for the corresponding monster files.
+        *   It reads the content of each found file, **removing the YAML frontmatter**.
+        *   It creates a **new note** (e.g., `Statblocks - [Your Note Name].md`) containing the extracted statblocks, separated by headers and horizontal rules.
+        *   A notice confirms creation and indicates if any statblocks couldn't be found.
+        *   The new note is usually opened automatically in a new tab.
 
 ---
 
@@ -110,7 +33,7 @@ Access the plugin settings via **Settings** > **Community Plugins** > **D&D 2024
 *   **Secondary Monster Location:** A second folder path searched if the monster isn't found in the primary location (e.g., `Compendiums/5e/Bestiary`).
 *   **Custom Monster Location:** A third folder path, often used for homebrew creatures (e.g., `Campaigns/MyCampaign/Monsters`).
 *   **Search All Vault if Not Found:** If enabled, the entire vault will be searched if the monster isn't found in the specified locations. (Default: `true`)
-*   **Use Encounter Multipliers:** If enabled, applies the official DMG 2024 XP multipliers based on the number of monsters when calculating difficulty. (Default: `true`)
+*   *(Encounter Multipliers setting removed as per latest code)*
 
 ---
 
@@ -130,20 +53,24 @@ The plugin attempts to parse CR and XP from your monster notes using these metho
 
 ## Troubleshooting
 
-*   **Monster Not Found:**
-    *   Double-check the creature name spelling.
+*   **Monster Not Found (in Modal or Export):**
+    *   Double-check the creature name spelling (including case if relevant to file names).
     *   Ensure the monster's file exists within one of the locations specified in the plugin settings (or that "Search All Vault" is enabled).
-    *   Verify the monster file name matches the creature name you're typing.
-    *   Check that the monster note contains CR/XP info in a compatible format (see above).
+    *   Verify the monster file name matches the creature name you're typing/using.
+    *   Check that the monster note contains CR/XP info in a compatible format (see above) if using lookup features.
 *   **Incorrect Difficulty Calculation:**
     *   Ensure the `encounter` code block table has the correct columns: Qty, Creature, CR, XP, Total XP.
-    *   Verify the XP values in the table are correct. The calculator parses *from the table*, not the original files.
+    *   Verify the XP values *in the table* are correct. The calculator parses directly from the rendered table source.
+*   **Edit Encounter Fails to Update In-Place:**
+    *   This can happen if you edit the note significantly *outside* the code block between rendering and clicking Edit, or if the file was moved or renamed. The plugin inserts the updated block at the cursor as a fallback.
+*   **Export Statblocks Missing Creatures:**
+    *   Check the "Monster Not Found" steps above for the specific missing creature(s). The export uses the same file-finding logic.
 
 ---
 
 ## Contributing
 
-Contributions, issues, and feature requests are welcome! Please feel free to open an issue or submit a pull request.
+Contributions, issues, and feature requests are welcome! Please feel free to open an issue or submit a pull request on the GitHub repository.
 
 ---
 
@@ -155,7 +82,7 @@ This plugin is released under the [MIT License](LICENSE).
 
 ## Acknowledgements
 
-*   98% Vibe Coding with Claude AI and Google AI Studio
+*   Significant assistance from AI coding partners (Claude AI, Google AI Studio).
 *   Inspired by the need for streamlined encounter building in Obsidian.
 *   Utilizes encounter balancing concepts from the Dungeons & Dragons 2024 Dungeon Master's Guide.
 *   Incorporates benchmark ideas popularized by Sly Flourish's Return of the Lazy Dungeon Master.
