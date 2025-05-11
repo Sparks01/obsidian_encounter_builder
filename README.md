@@ -1,30 +1,4 @@
 
-### 5. Use Rendered Features (Reading View)
-
-1.  Switch to Obsidian's Reading View.
-2.  The `encounter` block will render as a formatted table.
-3.  Below the table (or near the calculator inputs), you'll find several controls:
-    *   **Difficulty Calculator:**
-        *   Enter the **Party Size** and **Average Level**.
-        *   Click **"Calculate Difficulty"**.
-        *   Results appear, showing **DMG 2024 XP Difficulty** and **Lazy DM CR Benchmark** ratings.
-    *   **Edit Encounter Button:**
-        *   Click this button to modify the encounter defined in *this specific code block*.
-        *   The Encounter Modal opens, pre-filled with the creatures from the table.
-        *   Add, remove, or edit creatures as needed.
-        *   Click **"Save Changes"**. The plugin will attempt to update the original code block directly in your note.
-        (Note: If the note context has changed significantly, it might insert the updated block at the cursor instead).
-    *   **Export Statblocks Button:**
-        *   Click this button to generate a summary note for the creatures in *this specific code block*.
-        *   The plugin finds the unique creatures listed.
-        *   It searches your vault for the corresponding monster files.
-        *   It reads the content of each found file, **removing the YAML frontmatter**.
-        *   It creates a **new note** (e.g., `Statblocks - [Your Note Name].md`) containing the extracted statblocks, separated by headers and horizontal rules.
-        *   A notice confirms creation and indicates if any statblocks couldn't be found.
-        *   The new note is usually opened automatically in a new tab.
-
----
-
 ## Configuration
 
 Access the plugin settings via **Settings** > **Community Plugins** > **D&D 2024 Encounter Builder**.
@@ -49,24 +23,6 @@ The plugin attempts to parse CR and XP from your monster notes using these metho
 
 *Ensure your monster notes contain CR and XP information in one of these formats for the automatic lookup to work reliably.*
 
----
-
-## Troubleshooting
-
-*   **Monster Not Found (in Modal or Export):**
-    *   Double-check the creature name spelling (including case if relevant to file names).
-    *   Ensure the monster's file exists within one of the locations specified in the plugin settings (or that "Search All Vault" is enabled).
-    *   Verify the monster file name matches the creature name you're typing/using.
-    *   Check that the monster note contains CR/XP info in a compatible format (see above) if using lookup features.
-*   **Incorrect Difficulty Calculation:**
-    *   Ensure the `encounter` code block table has the correct columns: Qty, Creature, CR, XP, Total XP.
-    *   Verify the XP values *in the table* are correct. The calculator parses directly from the rendered table source.
-*   **Edit Encounter Fails to Update In-Place:**
-    *   This can happen if you edit the note significantly *outside* the code block between rendering and clicking Edit, or if the file was moved or renamed. The plugin inserts the updated block at the cursor as a fallback.
-*   **Export Statblocks Missing Creatures:**
-    *   Check the "Monster Not Found" steps above for the specific missing creature(s). The export uses the same file-finding logic.
-
----
 
 ## Contributing
 
